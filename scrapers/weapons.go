@@ -19,6 +19,7 @@ type Weapon struct {
 	CritChance float32 `json:"crit_chance"`
 	UseTime    int     `json:"use_time"`
 	ImageUrl   string  `json:"image_url"`
+	FileName   string  `json:"file_name"`
 }
 
 func ScrapeWeaponsList() ([]Weapon, error) {
