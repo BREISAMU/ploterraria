@@ -1,4 +1,4 @@
-# Ploterraria
+# [Ploterraria](https://ploterraria.vercel.app/)
 This is a plotting website that allows for custom comparisons of Terraria items based on selected axis stats.
 
 ![plot](./images/readme-gif.gif)
