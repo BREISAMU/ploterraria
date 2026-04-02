@@ -2,6 +2,9 @@
 main_test.go
 weapons/
 node_modules/
+.vercelignore
+.vercel
+deploy.ps1
 
 # Logs
 logs
