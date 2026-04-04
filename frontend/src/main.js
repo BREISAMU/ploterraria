@@ -116,8 +116,13 @@ async function drawPlot(x, y) {
       .stroke({ color: AXIS_TICK_COLOR, width: 1 });
     app.stage.addChild(tick);
 
+    var tickValue = Math.round(val).toString();
+    if(val < 1) {
+      tickValue = val.toFixed(2).toString()
+    }
+
     const label = new Text({
-      text: Math.round(val).toString(),
+      text: tickValue,
       style: tickLabelStyle,
     });
     label.anchor.set(0.5, 0);
@@ -137,8 +142,13 @@ async function drawPlot(x, y) {
       .stroke({ color: AXIS_TICK_COLOR, width: 1 });
     app.stage.addChild(tick);
 
+    var tickValue = Math.round(val).toString();
+    if(val < 1) {
+      tickValue = val.toFixed(2).toString()
+    }
+
     const label = new Text({
-      text: Math.round(val).toString(),
+      text: tickValue,
       style: tickLabelStyle,
     });
     label.anchor.set(1, 0.5);
@@ -185,7 +195,7 @@ async function drawPlot(x, y) {
     sprite.cursor = "pointer";
 
     const name = new Text({
-      text: item.name,
+      text: item.name + "(" + item[x].toString() + ", " + item[y].toString() + ")",
       style: weaponNameStyle,
     });
 
