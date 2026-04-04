@@ -24,16 +24,16 @@ for (const field of FIELDS) {
 
 // Graphics stuff
 const TICK_COUNT = 10;
-  const X_TICK_SIZE = 8;
-  const Y_TICK_SIZE = 8;
-  const AXIS_TICK_COLOR = 0xaaaaaa;
-  const LABEL_COLOR = "#aaaaaa";
-  const AXIS_PADDING = {
-    left: 70,
-    bottom: 60,
-    right: 20,
-    top: 20,
-  };
+const X_TICK_SIZE = 8;
+const Y_TICK_SIZE = 8;
+const AXIS_TICK_COLOR = 0xaaaaaa;
+const LABEL_COLOR = "#aaaaaa";
+const AXIS_PADDING = {
+  left: 70,
+  bottom: 60,
+  right: 20,
+  top: 20,
+};
 
 const tickLabelStyle = new TextStyle({
   fill: LABEL_COLOR,
@@ -117,8 +117,8 @@ async function drawPlot(x, y) {
     app.stage.addChild(tick);
 
     var tickValue = Math.round(val).toString();
-    if(val < 1) {
-      tickValue = val.toFixed(2).toString()
+    if (val < 1) {
+      tickValue = val.toFixed(2).toString();
     }
 
     const label = new Text({
@@ -143,8 +143,8 @@ async function drawPlot(x, y) {
     app.stage.addChild(tick);
 
     var tickValue = Math.round(val).toString();
-    if(val < 1) {
-      tickValue = val.toFixed(2).toString()
+    if (val < 1) {
+      tickValue = val.toFixed(2).toString();
     }
 
     const label = new Text({
@@ -177,16 +177,21 @@ async function drawPlot(x, y) {
     padding: 4,
   });
 
+  const validItems = data.filter(
+    (item) => !item.file_name.toLowerCase().endsWith("gif"),
+  );
+  const paths = validItems.map(
+    (item) => "/weapons/" + encodeURIComponent(item.file_name),
+  );
+  await Assets.load(paths);
+
   for (const item of data) {
     if (item.file_name.toLowerCase().endsWith("gif")) {
       console.log("Skipping GIF images, need to come back to this.");
       continue;
     }
 
-    const encoded_path = "/weapons/" + encodeURIComponent(item.file_name);
-    const texture = await Assets.load(encoded_path);
-    const sprite = Sprite.from(texture);
-
+    const sprite = Sprite.from("/weapons/" + encodeURIComponent(item.file_name));
     sprite.position.set(toScreenX(item[x]), toScreenY(item[y]));
     sprite.scale.set(0.8);
     sprite.anchor.set(0.5);
@@ -195,7 +200,8 @@ async function drawPlot(x, y) {
     sprite.cursor = "pointer";
 
     const name = new Text({
-      text: item.name + "(" + item[x].toString() + ", " + item[y].toString() + ")",
+      text:
+        item.name + "(" + item[x].toString() + ", " + item[y].toString() + ")",
       style: weaponNameStyle,
     });
 
